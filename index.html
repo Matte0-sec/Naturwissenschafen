@@ -45,6 +45,8 @@
             <div class="simulation-title"><div><p class="eyebrow" id="simCategory"></p><h2 id="simTitle"></h2></div><div class="simulation-actions"><button id="simStart" class="primary-button" type="button">Start</button><button id="simPause" class="tool-button" type="button" title="Pausieren">Ⅱ</button><button id="simReset" class="tool-button" type="button" title="Zurücksetzen">↺</button></div></div>
             <p id="simDescription" class="sim-description"></p>
             <section class="explanation-box" aria-label="Erklärung zum Experiment"><h3>Was passiert?</h3><p id="simExplanation"></p></section>
+            <div class="visual-mode"><span>Ansicht</span><button id="twoDimensional" class="active" type="button">2D</button><button id="threeDimensional" type="button">3D</button></div>
+            <div id="threeViewport" class="three-viewport" hidden aria-label="Dreidimensionale Darstellung des Physik-Experiments"></div>
             <canvas id="simulationCanvas" width="760" height="420" aria-label="Physik-Simulation"></canvas>
             <div id="measurements" class="measurements"></div>
             <div class="simulation-bottom"><div id="parameterControls" class="parameter-controls"></div><div class="chart-panel"><span id="chartLabel">Verlauf</span><canvas id="chartCanvas" width="330" height="150" aria-label="Live-Diagramm"></canvas></div></div>
@@ -145,6 +147,7 @@
     </section>
     </div>
   </main>
+  <script type="module" src="three-physics.js"></script>
   <script src="physics.js"></script>
   <script src="chemistry.js"></script>
   <script src="script.js"></script>

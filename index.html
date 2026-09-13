@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Labor: Energie & Reaktion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <section id="homeScreen" class="home-screen" aria-labelledby="homeTitle">
+      <p class="eyebrow">Virtuelles Naturwissenschaftslabor</p>
+      <h1 id="homeTitle">Wähle dein<br><span>Experiment.</span></h1>
+      <p class="home-intro">Untersuche physikalische Energie oder chemische Reaktionen in einer interaktiven Simulation.</p>
+      <div class="subject-choices">
+        <button class="subject-card physics-card" type="button" data-mode="physics">
+          <span class="subject-symbol">F</span><span><b>Physik</b><small>Wärme & Teilchenenergie</small></span><em>→</em>
+        </button>
+        <button class="subject-card chemistry-card" type="button" data-mode="chemistry">
+          <span class="subject-symbol">H+</span><span><b>Chemie</b><small>Säuren, Laugen & pH-Wert</small></span><em>→</em>
+        </button>
+      </div>
+    </section>
+
+    <section id="physicsPlatform" class="physics-platform" hidden aria-labelledby="physicsPlatformTitle">
+      <header class="platform-header">
+        <div>
+          <button id="physicsHomeButton" class="back-button" type="button">← Fächerwahl</button>
+          <p class="eyebrow">Physik Labor</p>
+          <h1 id="physicsPlatformTitle">Experimentier-<span>Plattform</span></h1>
+        </div>
+        <label class="search-box" for="experimentSearch">⌕ <input id="experimentSearch" type="search" placeholder="Experiment suchen" /></label>
+      </header>
+      <div class="platform-layout">
+        <aside class="catalog-panel">
+          <div class="category-filters" id="categoryFilters"></div>
+          <div class="experiment-cards" id="experimentCards"></div>
+        </aside>
+        <section class="simulation-workspace" aria-live="polite">
+          <div id="simulationEmpty" class="simulation-empty"><span>⇢</span><h2>Wähle ein Experiment</h2><p>Verändere reale Größen und beobachte ihre Folgen in Echtzeit.</p></div>
+          <div id="simulationPanel" hidden>
+            <div class="simulation-title"><div><p class="eyebrow" id="simCategory"></p><h2 id="simTitle"></h2></div><div class="simulation-actions"><button id="simStart" class="primary-button" type="button">Start</button><button id="simPause" class="tool-button" type="button" title="Pausieren">Ⅱ</button><button id="simReset" class="tool-button" type="button" title="Zurücksetzen">↺</button></div></div>
+            <p id="simDescription" class="sim-description"></p>
+            <section class="explanation-box" aria-label="Erklärung zum Experiment"><h3>Was passiert?</h3><p id="simExplanation"></p></section>
+            <canvas id="simulationCanvas" width="760" height="420" aria-label="Physik-Simulation"></canvas>
+            <div id="measurements" class="measurements"></div>
+            <div class="simulation-bottom"><div id="parameterControls" class="parameter-controls"></div><div class="chart-panel"><span id="chartLabel">Verlauf</span><canvas id="chartCanvas" width="330" height="150" aria-label="Live-Diagramm"></canvas></div></div>
+            <div class="challenge"><b>Was passiert, wenn ...?</b><span id="simChallenge"></span><small id="levelLabel">Stufe: Grundlagen</small></div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section id="chemistryPlatform" class="physics-platform chemistry-platform" hidden aria-labelledby="chemistryPlatformTitle">
+      <header class="platform-header">
+        <div>
+          <button id="chemistryHomeButton" class="back-button" type="button">← Fächerwahl</button>
+          <p class="eyebrow">Chemie Labor</p>
+          <h1 id="chemistryPlatformTitle">Reaktion <span>&</span> Analyse</h1>
+        </div>
+        <label class="search-box" for="chemistrySearch">⌕ <input id="chemistrySearch" type="search" placeholder="Experiment suchen" /></label>
+      </header>
+      <div class="platform-layout chemistry-layout">
+        <aside class="catalog-panel">
+          <div class="category-filters" id="chemistryFilters"></div>
+          <div class="experiment-cards" id="chemistryCards"></div>
+        </aside>
+        <section class="simulation-workspace" aria-live="polite">
+          <div id="chemistryEmpty" class="simulation-empty"><span>⚗</span><h2>Wähle ein Experiment</h2><p>Verändere Konzentrationen, Energie und Stoffmengen. Die Messwerte reagieren sofort.</p></div>
+          <div id="chemistryPanel" hidden>
+            <div class="simulation-title"><div><p class="eyebrow" id="chemCategory"></p><h2 id="chemTitle"></h2></div><div class="simulation-actions"><button id="chemStart" class="primary-button" type="button">Start</button><button id="chemPause" class="tool-button" type="button" title="Pausieren">Ⅱ</button><button id="chemReset" class="tool-button" type="button" title="Zurücksetzen">↺</button></div></div>
+            <p id="chemDescription" class="sim-description"></p>
+            <section class="explanation-box chemistry-explanation" aria-label="Erklärung zum Experiment"><h3>Was passiert?</h3><p id="chemExplanation"></p></section>
+            <canvas id="chemistryCanvas" width="760" height="420" aria-label="Chemie-Simulation"></canvas>
+            <div id="chemMeasurements" class="measurements"></div>
+            <div class="simulation-bottom"><div id="chemControls" class="parameter-controls"></div><div class="chart-panel"><span>Verlauf</span><canvas id="chemChart" width="330" height="150" aria-label="Chemie Diagramm"></canvas></div></div>
+            <div class="challenge"><b>Was passiert, wenn ...?</b><span id="chemChallenge"></span><small>Stufe: Grundlagen</small></div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <div id="labScreen" class="lab-screen" hidden>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow" id="experimentNumber">Virtuelles Experiment 01</p>
+        <h1 id="labTitle">Energie <span>&</span> Bewegung</h1>
+      </div>
+      <button id="homeButton" class="home-button" type="button">⌂ <span>Fächerwahl</span></button>
+    </header>
+
+    <section class="lab-grid" aria-label="Interaktives Naturwissenschaftslabor">
+      <aside class="control-panel">
+        <div class="panel-heading">
+          <p class="eyebrow">Steuerung</p>
+          <h2>Versuchsaufbau</h2>
+        </div>
+
+        <label class="control physics-only" for="heat">
+          <span>Wärmezufuhr <b id="heatValue">55 %</b></span>
+          <input id="heat" type="range" min="0" max="100" value="55" />
+        </label>
+        <label class="control chemistry-only" for="acid">
+          <span>Säurezugabe <b id="acidValue">0 ml</b></span>
+          <input id="acid" type="range" min="0" max="20" value="0" />
+        </label>
+        <label class="control chemistry-only" for="base">
+          <span>Laugenzugabe <b id="baseValue">0 ml</b></span>
+          <input id="base" type="range" min="0" max="20" value="0" />
+        </label>
+
+        <div class="actions">
+          <button id="startButton" class="primary-button" type="button">Experiment starten</button>
+          <button id="resetButton" class="icon-button" type="button" aria-label="Experiment zurücksetzen" title="Experiment zurücksetzen">↺</button>
+        </div>
+        <p class="note" id="modeNote">Erhitze die Probe und beobachte, wie Temperatur und Teilchenenergie zusammenhängen.</p>
+      </aside>
+
+      <section class="experiment-stage" aria-label="Versuchsbeobachtung">
+        <div class="stage-label"><span>Beobachtung</span><strong id="phase">Bereit</strong></div>
+        <div class="bench">
+          <div class="heat-glow"></div>
+          <div class="beaker" aria-label="Becherglas mit Lösung">
+            <div class="rim"></div>
+            <div class="liquid" id="liquid"><div class="bubbles" id="bubbles"></div></div>
+          </div>
+          <div class="burner physics-only"><div class="flame" id="flame"></div><div class="burner-top"></div><div class="burner-base"></div></div>
+        </div>
+        <div class="observation" id="observation">Stelle die Bedingungen ein und starte den Versuch.</div>
+      </section>
+
+      <aside class="readouts">
+        <div class="panel-heading">
+          <p class="eyebrow">Live-Messung</p>
+          <h2>Messwerte</h2>
+        </div>
+        <div class="metric physics-only"><span>Temperatur</span><strong id="temperature">22.0 <small>°C</small></strong><div class="meter"><i id="tempMeter"></i></div></div>
+        <div class="metric chemistry-only"><span>pH-Wert</span><strong id="ph">7.0</strong><div class="ph-scale"><i id="phMarker"></i></div><small id="phLabel">neutral</small></div>
+        <div class="metric physics-only"><span>Teilchenenergie</span><strong id="energy">0 <small>kJ</small></strong><div class="meter teal"><i id="energyMeter"></i></div></div>
+        <div class="reaction-card"><span id="resultLabel">Bewegungsenergie</span><strong id="rate">0.0 %</strong><p id="reactionText">Noch keine Aktivität</p></div>
+      </aside>
+    </section>
+    </div>
+  </main>
+  <script src="physics.js"></script>
+  <script src="chemistry.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
